@@ -3,7 +3,3 @@ routerAdd("GET", "/hello/:name", (c) => {
 
   return c.json(200, { "message": "Hello hi" + name })
 })
-
-routerAdd("GET", "/", (c) => {
-  return c.json(200, { "message": "ok" })
-})
