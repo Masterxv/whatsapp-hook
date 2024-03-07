@@ -9,3 +9,8 @@ services:
       # - ./pb_migrations:/pb/pb_migrations
       # - ./pb_hooks:/pb/pb_hooks
       - ./pb_data:/pb/pb_data
+  nitro:
+    build:
+        context: ./nitro
+    ports:
+      - 3000:3000

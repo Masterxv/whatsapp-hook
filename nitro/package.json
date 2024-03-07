@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nitro build",
+    "dev": "nitro dev",
+    "start": "node .output/server/index.mjs",
+    "prepare": "nitro prepare",
+    "preview": "nodemon .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "nitropack": "latest",
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "openai": "^4.28.4"
+  }
+}
