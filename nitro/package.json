@@ -3,9 +3,8 @@
   "scripts": {
     "build": "nitro build",
     "dev": "nitro dev",
-    "start": "export $(cat .env | egrep -v '#|^$' | xargs) && node .output/server/index.mjs",
-    "prepare": "nitro prepare",
-    "preview": "nodemon .output/server/index.mjs"
+    "preview": "export $(cat .env | egrep -v '#|^$' | xargs) && node .output/server/index.mjs",
+    "prepare": "nitro prepare"
   },
   "devDependencies": {
     "nitropack": "latest",
