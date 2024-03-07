@@ -3,3 +3,10 @@ routerAdd("GET", "/hello/:name", (c) => {
 
   return c.json(200, { "message": "Hello hi" + name })
 })
+
+
+routerAdd("GET", "/", (c) => {
+  let name = c.pathParam("name")
+
+  return c.json(200, { "message": "OK" })
+})
