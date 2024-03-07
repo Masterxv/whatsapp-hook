@@ -6,7 +6,5 @@ routerAdd("GET", "/hello/:name", (c) => {
 
 
 routerAdd("GET", "/", (c) => {
-  let name = c.pathParam("name")
-
   return c.json(200, { "message": "OK" })
 })
