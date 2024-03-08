@@ -2,7 +2,10 @@ import { Inngest } from "inngest";
 import { serve } from "inngest/next";
 
 // Create a client to send and receive events
-export const inngest = new Inngest({ id: "my-app" });
+export const inngest = new Inngest({ 
+  id: "my-app",
+  servePath: "/next/api/inngest" 
+});
 
 const helloWorld = inngest.createFunction(
   { id: "hello-world" },
