@@ -16,3 +16,10 @@ services:
       - 3000:3000
     environment:
       - OPENAI_API_KEY
+  next:
+    build:
+        context: ./nextjs-docker
+    ports:
+      - 3001:3001
+    environment:
+      - OPENAI_API_KEY

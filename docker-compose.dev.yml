@@ -8,3 +8,9 @@ services:
     volumes:
       - ./nitro:/app
     command: ["npm", "run", "no"]
+  next:
+    volumes:
+      - ./nextjs-docker:/app
+    command: ["npm", "run", "dev"]
+    environment:
+      - NODE_ENV=development
