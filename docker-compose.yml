@@ -2,6 +2,8 @@ version: '3'
 services:
   nocodb:
     image: nocodb/nocodb:latest
+    volumes:
+      - ./nocodb:/usr/src/app/data
     ports:
       - 8083:8083
     environment:
