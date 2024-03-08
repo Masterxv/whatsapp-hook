@@ -31,12 +31,12 @@ export default async function handler(
     try {
       const authData = await pb.admins.authWithPassword('icemelt7@gmail.com', 'Jojo.33443344');
       const resultList = await pb.collection('leads').getList(1, 50, {
-        filter: `phone_number = "${business_phone_number_id}"`,
+        filter: `phone_number = "${message.from}"`,
       });
       if (resultList.items.length === 0) {
         const data = {
-          "phone_number": `${business_phone_number_id}`,
-          "name": `${business_phone_number_id}`
+          "phone_number": `${message.from}`,
+          "name": `${message.from}`
         };
         
         const record = await pb.collection('leads').create(data);
