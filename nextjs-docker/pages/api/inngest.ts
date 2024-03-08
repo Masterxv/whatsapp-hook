@@ -3,7 +3,7 @@ import { serve } from "inngest/next";
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ 
-  id: "my-app2",
+  id: "my-app",
   servePath: "/next/api/inngest" 
 });
 

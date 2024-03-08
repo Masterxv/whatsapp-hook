@@ -25,3 +25,4 @@ services:
       - OPENAI_API_KEY
       - INNGEST_SIGNING_KEY
       - INNGEST_EVENT_KEY
+      - INNGEST_SERVE_PATH
