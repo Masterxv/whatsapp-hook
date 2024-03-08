@@ -6,6 +6,8 @@ services:
       - ./nocodb:/usr/src/app/data
     ports:
       - 8083:8083
+    environment:
+      - PORT=8083
   web:
     build:
         context: .
