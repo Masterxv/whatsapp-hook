@@ -3,14 +3,15 @@
   "scripts": {
     "build": "nitro build",
     "dev": "nitro dev",
+    "no": "echo 1",
     "preview": "export $(cat .env | egrep -v '#|^$' | xargs) && node .output/server/index.mjs",
     "prepare": "nitro prepare"
   },
   "devDependencies": {
-    "nitropack": "latest",
-    "nodemon": "^3.1.0"
+    "nitropack": "latest"
   },
   "dependencies": {
-    "openai": "^4.28.4"
+    "openai": "^4.28.4",
+    "pocketbase": "^0.21.1"
   }
 }

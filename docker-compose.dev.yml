@@ -7,3 +7,4 @@ services:
   nitro:
     volumes:
       - ./nitro:/app
+    command: ["npm", "run", "no"]
