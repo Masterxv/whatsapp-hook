@@ -8,7 +8,7 @@ services:
       - 8083:8083
     environment:
       - PORT=8083
-      - NUXT_PUBLIC_NC_BACKEND_URL=https://node.taskmate.ae/db/
+      - NUXT_PUBLIC_NC_BACKEND_URL=https://noco.taskmate.ae
   web:
     build:
         context: .
