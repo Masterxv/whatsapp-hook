@@ -13,7 +13,7 @@ export default async function handler(
 ) {
   const { method } = req;
   if (method !== "POST") {
-    return res.status(405).end();
+    return res.status(200).end();
   }
   // POST call
   const message = req.body.entry?.[0]?.changes[0]?.value?.messages?.[0];
@@ -56,5 +56,5 @@ export default async function handler(
     });
   }
 
-  res.status(200);
+  return res.status(200).end();
 }
