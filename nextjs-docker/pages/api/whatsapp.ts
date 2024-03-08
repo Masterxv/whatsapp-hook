@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { inngest } from "./inngest";
 import axios from "axios";
 
+export const dynamic = 'force-dynamic'
+
 const GRAPH_API_TOKEN = 'EAAI5Hdm2fCsBOwo1gwKgrAUmGidJvJXOSp12ZCNLOAz9ZBtBed8ECiZB0Gz2JtFZBt7rYVdCyIirjS3FnVouiJZBH72ofGrrpZCIgRZBRR7hphAOZBJ8B7bJDv0zpVWjAi7XIoCI3KlJg8Wd55q6neOk88ZAM9gb1ZBQXh84SZBweoRmba9vymBNGlOLNhXINjeCBRxZCpfD8gpUnwq63iGFUiXc4ZCFqM8BnqQeZA';
 
 // Create a simple async Next.js API route handler
@@ -10,18 +12,9 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const { method } = req;
-  const mode = req.query["hub.mode"];
-  const token = req.query["hub.verify_token"];
-  const challenge = req.query["hub.challenge"];
-
-  // check the mode and token sent are correct
-  if (method === 'GET' && mode === "subscribe" && token === 'EAAI5Hdm2fCsBO0SPvGlJio5N7ofeqoQKnDpjCZBZAOq8uyc70TaDIbyViN5VU0qktEyCieaFLU8mD5ujAxCFeoYtA9RZAOl4XG7VB4AOFallWhi045xYF1M4oVi7OYvtvNH2jvPEinQS3dC5BFrGCREZAPSGnJcwvxxS1xi8n53jNpAVqrt8SzbaZCLVZAuxunZBKpmmBVU3VkSYvLH1zFcJ8KZBnP7YY4tw') {
-    // respond with 200 OK and challenge token from the request
-    res.status(200).send(challenge);
-    console.log("Webhook verified successfully!");
-    return;
+  if (method !== "POST") {
+    return res.status(405).end();
   }
-
   // POST call
   const message = req.body.entry?.[0]?.changes[0]?.value?.messages?.[0];
 
