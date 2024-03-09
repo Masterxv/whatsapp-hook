@@ -6,7 +6,7 @@ export default function Home({
   resultList, conversationList,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const route = useRouter();
-  const convoId = route.query.convo;
+  const convoId = route.query.convo as string; // Add type assertion
   return (
     <ChatLayout convoId={convoId} resultList={resultList} conversationList={conversationList} />
   );

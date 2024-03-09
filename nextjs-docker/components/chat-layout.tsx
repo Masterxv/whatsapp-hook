@@ -9,14 +9,14 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
-import { useEffect, useRef, useState } from "react"
+import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, SVGProps, useEffect, useRef, useState } from "react"
 
 const pb = new PocketBase('https://node.taskmate.ae');
 
-export function ChatLayout({ convoId, resultList, conversationList}) {
+export function ChatLayout({ convoId, resultList, conversationList }: { convoId: string, resultList: any, conversationList: any }) {
   const box = useRef(null);
-  const currentConvo = resultList.items.find((item) => item.id === convoId);
-  const [messages, setMessages] = useState(conversationList.find((item) => item.id === convoId));
+  const currentConvo = resultList.items.find((item: { id: string; }) => item.id === convoId);
+  const [messages, setMessages] = useState(conversationList.find((item: { id: string; }) => item.id === convoId));
 
   useEffect(() => {
     pb.admins.authWithPassword('icemelt7@gmail.com', 'Jojo.33443344').then((res) => {
@@ -24,7 +24,7 @@ export function ChatLayout({ convoId, resultList, conversationList}) {
         console.log(e.action);
         console.log(e.record);
         if (e.action === 'create') {
-          setMessages((prev) => {
+          setMessages((prev: { messages: any; }) => {
             return {
               ...prev,
               messages: [...prev.messages, e.record],
@@ -39,7 +39,9 @@ export function ChatLayout({ convoId, resultList, conversationList}) {
     }
     
   }, [convoId]);
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
+    const box = useRef<HTMLInputElement>(null); // Add type annotation for the 'box' ref
+
     event.preventDefault(); // Prevent the default form submission behavior
     // Your form submission logic here
     // Create a FormData object, passing in the form event's current target
@@ -51,20 +53,9 @@ export function ChatLayout({ convoId, resultList, conversationList}) {
     // Now you can use formDataObj or directly work with formData
     console.log('Form submitted with:', formDataObj);
     // send a message with the api route 
-    const res = await fetch('/api/send', {
-      method: 'POST',
-      body: JSON.stringify({
-        convoId: convoId,
-        message: formDataObj.message,
-        phoneNo: currentConvo.phone_number,
-        from: 'agent',
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    box.current.value = '';
+    if (box.current) {
+      box.current.value = '';
+    }
   };
   
   return (
@@ -83,7 +74,7 @@ export function ChatLayout({ convoId, resultList, conversationList}) {
           </div>
           <div className="flex-1 overflow-auto py-2">
             <div className="grid items-start px-4 text-sm font-medium">
-              {resultList.items.map((item) => (
+              {resultList.items.map((item: { id: Key | null | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }) => (
                 <Link
                   className="flex items-center gap-3 rounded-lg mb-2 bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900"
                   href={`?convo=${item.id}`}
@@ -181,7 +172,7 @@ export function ChatLayout({ convoId, resultList, conversationList}) {
           </div>
           <div className="border-t border-gray-200">
             <div className="grid gap-4 p-4">
-              {messages.messages.map((message) => (
+              {messages.messages.map((message: { id: Key | null | undefined; from: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | PromiseLikeOfReactNode | null | undefined; message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }) => (
                 <div
                   className="flex items-start gap-4"
                   key={message.id}
@@ -225,7 +216,7 @@ export function ChatLayout({ convoId, resultList, conversationList}) {
 }
 
 
-function MessageSquareIcon(props) {
+function MessageSquareIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -245,7 +236,7 @@ function MessageSquareIcon(props) {
 }
 
 
-function SearchIcon(props) {
+function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

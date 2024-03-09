@@ -17,7 +17,6 @@ export default async function handler(
     const authData = await pb.admins.authWithPassword('icemelt7@gmail.com', 'Jojo.33443344');
     console.log(pb.authStore.isValid);
     console.log(pb.authStore.token);
-    console.log(pb.authStore.model.id);
     const resultList = await pb.collection('leads').getList(1, 50, {
       filter: 'phone_number = "971555555555"',
     });

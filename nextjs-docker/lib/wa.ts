@@ -69,7 +69,7 @@ export async function send_list(recipient_number: number, list?: string[]) {
         ]
       }
     }
-    const sent_list_message = wa.messages.interactive(list_message, recipient_number);
+    const sent_list_message = wa.messages.interactive(list_message as unknown as any, recipient_number);
 
     await sent_list_message.then((res) => {
       // console.log(res.rawResponse());
