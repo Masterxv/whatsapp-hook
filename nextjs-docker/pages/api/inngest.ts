@@ -79,8 +79,8 @@ const continueConversation = inngest.createFunction(
       await send_list(event.data.from);
       await addMessage(user.id, 'rate list sent', 'agent')
     } else {
-      await send_message(event.data.from, 'Thank you, we will get back to you soon');
-      await addMessage(user.id, 'Thank you, we will get back to you soon', 'agent')
+      // await send_message(event.data.from, 'Thank you, we will get back to you soon');
+      // await addMessage(user.id, 'Thank you, we will get back to you soon', 'agent')
     }
 
     return { event, body: "User Continued" };

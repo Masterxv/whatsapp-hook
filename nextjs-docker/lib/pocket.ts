@@ -21,6 +21,26 @@ export const addMessage = async(userId: string, message: string, from: string) =
   return record;
 }
 
+// get all conversations
+export const getConversations = async () => {
+  const authData = await pb.admins.authWithPassword('icemelt7@gmail.com', 'Jojo.33443344');
+  const resultList = await pb.collection('leads').getList(1, 50, {
+    sort: '-created',
+  });
+  // get all messages
+  const conversationList = [];
+  for (let i = 0; i < resultList.items.length; i++) {
+    const conversation = await pb.collection('messages').getList(1, 50, {
+      filter: `user = "${resultList.items[i].id}"`,
+    });
+    conversationList.push({ id: resultList.items[i].id, messages: conversation.items });
+  }
+  return {
+    resultList,
+    conversationList 
+  };
+}
+
 export const getConversation = async (phoneNumber: string) => {
   const authData = await pb.admins.authWithPassword('icemelt7@gmail.com', 'Jojo.33443344');
   const resultList = await pb.collection('leads').getList(1, 50, {

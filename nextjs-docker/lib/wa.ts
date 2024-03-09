@@ -5,6 +5,7 @@ const wa = new WhatsApp(Number(process.env.WA_PHONE_NUMBER_ID));
 
 export async function send_message(recipient_number: number, message: string) {
   try {
+    console.log("sending whatspp to", recipient_number, message);
     const sent_text_message = wa.messages.text({ "body": message }, recipient_number);
 
     await sent_text_message.then((res) => {
