@@ -5,15 +5,17 @@ const wa = new WhatsApp(Number(process.env.WA_PHONE_NUMBER_ID));
 
 export async function send_message(recipient_number: number, message: string) {
   try {
-    console.log("sending whatspp to", recipient_number, message);
+    // console.log("sending whatspp to", recipient_number, message);
     const sent_text_message = wa.messages.text({ "body": message }, recipient_number);
 
     await sent_text_message.then((res) => {
-      // console.log(res.rawResponse());
+      // console.log(res.responseBodyToJSON());
+      console.log("success")
     });
   }
   catch (e) {
-    console.log(JSON.stringify(e));
+    console.log("error")
+    // console.log(JSON.stringify(e));
   }
 }
 
@@ -85,7 +87,7 @@ export async function readMessage(message_id: string) {
     const read_message = wa.messages.status({ status: 'read', message_id });
 
     await read_message.then((res) => {
-      // console.log(res.rawResponse());
+      console.log(res.rawResponse());
     });
   }
   catch (e) {

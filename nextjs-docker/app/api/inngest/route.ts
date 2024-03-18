@@ -1,7 +1,7 @@
 import { Inngest } from "inngest";
 import { serve } from "inngest/next";
-import { addMessage, getConversation, isNewUser, updateRecord, upsertNumber } from "../../lib/pocket";
-import { readMessage, send_list, send_message } from "../../lib/wa";
+import { addMessage, getConversation, isNewUser, updateRecord, upsertNumber } from "../../../lib/pocket";
+import { readMessage, send_list, send_message } from "../../../lib/wa";
 
 const NAME_MSG = "May I know your name?";
 
@@ -88,7 +88,7 @@ const continueConversation = inngest.createFunction(
 );
 
 // Create an API that serves zero functions
-export default serve({
+export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
     recieveTextMessage,

@@ -1,3 +1,4 @@
+import { NextRequest, NextResponse } from 'next/server';
 import PocketBase from 'pocketbase'
 const pb = new PocketBase('https://node.taskmate.ae/');
 
@@ -85,4 +86,25 @@ export const upsertNumber = async (phoneNumber: string) => {
   } else {
     return resultList.items[0];
   }
+}
+
+// you can place this helper in a separate file so that it can be reused
+async function initPocketBase(req: NextRequest, res: NextResponse) {
+  // load the store data from the request cookie string
+  pb.authStore.loadFromCookie(req?.cookies.toString() || '');
+
+  // send back the default 'pb_auth' cookie to the client with the latest store state
+  pb.authStore.onChange(() => {
+    res?.headers.set('set-cookie', pb.authStore.exportToCookie());
+  });
+
+  try {
+      // get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
+      pb.authStore.isValid && await pb.collection('users').authRefresh();
+  } catch (_) {
+      // clear the auth store on failed refresh
+      pb.authStore.clear();
+  }
+
+  return pb
 }
