@@ -1,4 +1,4 @@
-import { inngest } from "../inngest/route";
+import { inngest } from "@/lib/utils";
 
 import { NextRequest, NextResponse } from "next/server";
 

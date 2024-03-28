@@ -1,15 +1,9 @@
-import { Inngest } from "inngest";
 import { serve } from "inngest/next";
 import { addMessage, getConversation, isNewUser, updateRecord, upsertNumber } from "../../../lib/pocket";
 import { readMessage, send_list, send_message } from "../../../lib/wa";
+import { inngest } from "@/lib/utils";
 
 const NAME_MSG = "May I know your name?";
-
-// Create a client to send and receive events
-export const inngest = new Inngest({ 
-  id: "my-app",
-  servePath: "/next/api/inngest" 
-});
 
 const recieveTextMessage = inngest.createFunction(
   { id: "text-message" },
