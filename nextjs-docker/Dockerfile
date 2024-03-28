@@ -42,6 +42,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 COPY --from=builder --chown=nextjs:nodejs /app/main.db ./
+RUN chown nextjs:nodejs ./main.db
 
 USER nextjs
 
