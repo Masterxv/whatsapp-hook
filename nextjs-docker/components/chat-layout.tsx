@@ -31,8 +31,8 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
     console.log({ convoId }, currentConvo.name);
     pb.admins.authWithPassword('icemelt7@gmail.com', 'Jojo.33443344').then((res) => {
       pb.collection('messages').subscribe('*', function (e) {
-        console.log(e.action);
-        console.log(e.record);
+        // console.log(e.action);
+        // console.log(e.record);
         if (e.action === 'create') {
           setMessages((prev: { messages: any; }) => {
             return {

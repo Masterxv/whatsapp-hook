@@ -59,7 +59,7 @@ const continueConversation = inngest.createFunction(
     
     const conversation = await getConversation(event.data.from);
     const messages = conversation?.items.map((item) => item.message) || [];
-    console.log(messages);
+    // console.log(messages);
 
     const secondLastMessage = messages[messages.length - 2];
     const lastMessage = messages[messages.length - 1];

@@ -87,7 +87,7 @@ export async function readMessage(message_id: string) {
     const read_message = wa.messages.status({ status: 'read', message_id });
 
     await read_message.then((res) => {
-      console.log(res.rawResponse());
+      console.log("sent read status");
     });
   }
   catch (e) {
