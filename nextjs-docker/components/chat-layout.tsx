@@ -205,7 +205,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
                 (document?.getElementById("chat-window") ?? { scrollTo: () => {}}).scrollTo(0, 2000);
               }
             }} className="flex gap-4 p-4 border-t">
-              <Input ref={box} name="message" className="flex-1 min-h-[40px] dark:text-white" placeholder="Type a message..." type="text" />
+              <Input ref={box} name="message" className="flex-1 min-h-[40px] " placeholder="Type a message..." type="text" />
               <Button type="submit">Send</Button>
             </form>
           </div>
