@@ -13,7 +13,7 @@ import type { ActionResult } from "@/lib/form";
 export default async function Page() {
 	const { user } = await validateRequest();
 	if (user) {
-		return redirect("/");
+		return redirect("/next");
 	}
 	return (
 		<div className="p-32">
@@ -71,5 +71,5 @@ async function login(_: any, formData: FormData): Promise<ActionResult> {
 	const session = await lucia.createSession(existingUser.id, {});
 	const sessionCookie = lucia.createSessionCookie(session.id);
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-	return redirect("/");
+	return redirect("/next");
 }

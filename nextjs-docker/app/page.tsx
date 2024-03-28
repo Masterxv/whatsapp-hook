@@ -13,7 +13,7 @@ export default async function Home({
   const convoId = searchParams.convo; // Add type assertion
   const { user } = await validateRequest();
 	if (!user) {
-		return redirect("/login");
+		return redirect("/next/login");
 	}
   return (<>
 			<div className='flex px-4 items-center border-b-2'>
@@ -53,5 +53,5 @@ async function logout(): Promise<ActionResult> {
 
 	const sessionCookie = lucia.createBlankSessionCookie();
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-	return redirect("/login");
+	return redirect("/next/login");
 }

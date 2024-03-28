@@ -14,7 +14,7 @@ import type { ActionResult } from "@/lib/form";
 export default async function Page() {
 	const { user } = await validateRequest();
 	if (user) {
-		return redirect("/");
+		return redirect("/next");
 	}
 	return (
 		<div className="p-32">
@@ -78,5 +78,5 @@ async function signup(_: any, formData: FormData): Promise<ActionResult> {
 			error: "An unknown error occurred"
 		};
 	}
-	return redirect("/");
+	return redirect("/next");
 }
