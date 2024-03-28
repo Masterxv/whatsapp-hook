@@ -28,7 +28,7 @@ export default async function Page() {
 				<br />
 				<button className="btn btn-primary mb-6">Continue</button>
 			</Form>
-			<Link href="/login" className="btn btn-secondary">Sign in</Link>
+			<Link href="/next/login" className="btn btn-secondary">Sign in</Link>
 		</div>
 	);
 }
