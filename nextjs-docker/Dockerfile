@@ -42,7 +42,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 COPY --from=builder --chown=nextjs:nodejs /app/main.db ./
-RUN chown nextjs:nodejs ./main.db
+RUN chown -R nextjs:nodejs ./
+RUN chmod 777 ./main.db
 
 USER nextjs
 
