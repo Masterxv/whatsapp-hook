@@ -22,7 +22,11 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
   const currentConvo = resultList.items.find((item: { id: string; }) => item.id === convoId);
   const [messages, setMessages] = useState(conversationList.find((item: { id: string; }) => item.id === convoId));
 
+  const [drawerState, toggleDrawer] = useState(true);
   useEffect(() => {
+    if (!currentConvo?.name) {
+      return;
+    }
     setMessages(conversationList.find((item: { id: string; }) => item.id === convoId));
     console.log({ convoId }, currentConvo.name);
     pb.admins.authWithPassword('icemelt7@gmail.com', 'Jojo.33443344').then((res) => {
@@ -49,11 +53,11 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
     
   }, [convoId]);
   
-  const handleSubmitWithData = handleSubmit.bind(null, { convoId, phoneNo: currentConvo.phone_number, from: 'agent' });
+  const handleSubmitWithData = handleSubmit.bind(null, { convoId, phoneNo: currentConvo?.phone_number, from: 'agent' });
   return (
-    <div className="grid h-screen min-h-screen w-full lg:grid-cols-[280px_1fr]">
-      <div className="hidden border-r bg-gray-100/40 lg:block">
-        <div className="flex h-full max-h-screen flex-col gap-2">
+    <div className="h-screen min-h-screen w-full flex">
+      <div className="border-r bg-gray-100/40 block">
+        <div className={clsx(`h-full max-h-screen flex-col gap-2`, drawerState ? 'flex' : 'hidden')}>
           <div className="flex h-[60px] items-center border-b px-6">
             <Link className="flex items-center gap-2 font-semibold" href="#">
               <MessageSquareIcon className="h-6 w-6" />
@@ -64,7 +68,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
               <span className="sr-only">Toggle search</span>
             </Button>
           </div>
-          <div className="flex-1 overflow-auto py-2">
+          <div className='flex-1 overflow-auto py-2'>
             <div className="grid items-start px-4 text-sm font-medium">
               {resultList.items.map((item: { id: Key | null | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }) => (
                 <Link
@@ -92,18 +96,18 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex grow flex-col">
         <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6">
-          <Link className="lg:hidden flex items-center gap-4 font-semibold" href="#">
+          <button className="lg:hidden flex items-center gap-4 font-semibold" onClick={e => toggleDrawer(!drawerState)}>
             <MessageSquareIcon className="h-6 w-6" />
             <span className="sr-only">Conversations</span>
-          </Link>
+          </button>
           <div className="w-full flex-1">
             <form>
               <div className="relative">
                 <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 " />
                 <Input
-                  className="w-full bg-gray-100/50 placeholder-gray-300 rounded-lg "
+                  className="w-full pl-4 bg-gray-100/50 placeholder-gray-300 rounded-lg "
                   placeholder="Search conversations..."
                   type="search"
                 />
@@ -156,15 +160,15 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
                 width="40"
               />
               <div className="flex-1">
-                <h1 className="font-semibold text-lg">{currentConvo.name}</h1>
-                <p className="text-sm text-gray-500">Conversation with customer ID: {currentConvo.id}</p>
+                <h1 className="font-semibold text-lg">{currentConvo?.name}</h1>
+                <p className="text-sm text-gray-500">Conversation with customer ID: {currentConvo?.id}</p>
               </div>
               <Button size="sm">Assign</Button>
             </div>
           </div>
-          <div className="border-t border-gray-200">
+          <div id="chat-window" className="border-t border-gray-200 h-[800px] overflow-auto">
             <div className="grid gap-4 p-4">
-              {messages.messages.map((message: { id: Key | null | undefined; from: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | PromiseLikeOfReactNode | null | undefined; message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }) => (
+              {!messages?.messages ? <div>Select a conversation</div> : messages.messages.map((message: { id: Key | null | undefined; from: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | PromiseLikeOfReactNode | null | undefined; message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }) => (
                 <div
                   className="flex items-start gap-4"
                   key={message.id}
@@ -191,15 +195,13 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
                   </div>
                 </div>
               ))}
-              
-              
             </div>
           </div>
           <div className="mt-auto">
             <form ref={ref} action={async (formData) => {
               ref.current?.reset();
               await handleSubmitWithData(formData);
-              window.scrollTo(0, document.body.scrollHeight);
+              document.getElementById("chat-window").scrollTo(0, 2000);
             }} className="flex gap-4 p-4 border-t">
               <Input ref={box} name="message" className="flex-1 min-h-[40px] dark:text-white" placeholder="Type a message..." type="text" />
               <Button type="submit">Send</Button>

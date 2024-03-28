@@ -1,29 +1,25 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { inngest } from "../inngest/route";
 
-import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = 'force-dynamic'
 
-const GRAPH_API_TOKEN = 'EAAI5Hdm2fCsBOwo1gwKgrAUmGidJvJXOSp12ZCNLOAz9ZBtBed8ECiZB0Gz2JtFZBt7rYVdCyIirjS3FnVouiJZBH72ofGrrpZCIgRZBRR7hphAOZBJ8B7bJDv0zpVWjAi7XIoCI3KlJg8Wd55q6neOk88ZAM9gb1ZBQXh84SZBweoRmba9vymBNGlOLNhXINjeCBRxZCpfD8gpUnwq63iGFUiXc4ZCFqM8BnqQeZA';
+export async function GET(req: NextRequest) {
+  const mode = req.nextUrl.searchParams.get("hub.mode");
+  const token = req.nextUrl.searchParams.get("hub.verify_token");
+  const challenge = req.nextUrl.searchParams.get("hub.challenge");
 
+  // check the mode and token sent are correct
+  if (mode === "subscribe" && token === 'HAPPY') {
+    // respond with 200 OK and challenge token from the request
+    return NextResponse.json({ challenge });
+  } else {
+    // respond with '403 Forbidden' if verify tokens do not match
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+}
 // Create a simple async Next.js API route handler
 export async function POST(req: Request, res: Response) {
-  // const { method } = req;
-  // if (method !== "POST") {
-  //   const mode = req.query["hub.mode"];
-  //   const token = req.query["hub.verify_token"];
-  //   const challenge = req.query["hub.challenge"];
-
-  //   // check the mode and token sent are correct
-  //   if (mode === "subscribe" && token === 'HAPPY') {
-  //     // respond with 200 OK and challenge token from the request
-  //     res.status(200).send(challenge);
-  //   } else {
-  //     // respond with '403 Forbidden' if verify tokens do not match
-  //     res.status(403);
-  //   }
-  // }
   try {
     const body = await req.json();
     // POST call
