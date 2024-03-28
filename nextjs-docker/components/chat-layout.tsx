@@ -80,7 +80,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
                     alt="Avatar"
                     className="rounded-full"
                     height="32"
-                    src="/placeholder.svg"
+                    src="/next/placeholder.svg"
                     style={{
                       aspectRatio: "32/32",
                       objectFit: "cover",
@@ -125,7 +125,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
                   alt="Avatar"
                   className="rounded-full"
                   height="32"
-                  src="/placeholder.svg"
+                  src="/next/placeholder.svg"
                   style={{
                     aspectRatio: "32/32",
                     objectFit: "cover",
@@ -152,7 +152,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
                 alt="Avatar"
                 className="rounded-full"
                 height="40"
-                src="/placeholder.svg"
+                src="/next/placeholder.svg"
                 style={{
                   aspectRatio: "40/40",
                   objectFit: "cover",
@@ -177,7 +177,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
                     alt="Avatar"
                     className="rounded-full"
                     height="40"
-                    src="/placeholder.svg"
+                    src="/next/placeholder.svg"
                     style={{
                       aspectRatio: "40/40",
                       objectFit: "cover",
