@@ -36,3 +36,6 @@ services:
       - INNGEST_EVENT_KEY
       - INNGEST_SERVE_PATH
       - NODE_ENV=production
+      - WA_PHONE_NUMBER_ID
+      - CLOUD_API_ACCESS_TOKEN
+      - CLOUD_API_VERSION=v16.0
