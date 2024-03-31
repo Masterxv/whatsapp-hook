@@ -1,6 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
-
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (req: Request) => {
   return Response.redirect(req.url + "/admin");
 }

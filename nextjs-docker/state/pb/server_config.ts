@@ -16,7 +16,7 @@ export async function route_handlers_pb(req: NextRequest, res: NextResponse) {
   });
   try {
     // get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
-    pb.authStore.isValid && (await pb.collection(pb_user_collection).authRefresh());
+    pb.authStore.isValid && (await pb.collection(pb_user_collection ?? 'users').authRefresh());
   } catch (_) {
     // clear the auth store on failed refresh
     pb.authStore.clear();
