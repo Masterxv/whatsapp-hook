@@ -12,7 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body data-theme="light">
+        <div id="fb-root" />
+        {/* <script src="https://connect.facebook.net/en_US/sdk.js"></script> */}
+        
         {children}
       </body>
     </html>

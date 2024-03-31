@@ -55,9 +55,9 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
   
   const handleSubmitWithData = handleSubmit.bind(null, { convoId, phoneNo: currentConvo?.phone_number, from: 'agent' });
   return (
-    <div className="h-screen min-h-screen w-full flex">
+    <div className="w-full flex">
       <div className="border-r bg-gray-100/40 block">
-        <div className={clsx(`h-full max-h-screen flex-col gap-2`, drawerState ? 'flex' : 'hidden')}>
+        <div className={clsx(`h-full flex-col gap-2`, drawerState ? 'flex' : 'hidden')}>
           <div className="flex h-[60px] items-center border-b px-6">
             <Link className="flex items-center gap-2 font-semibold" href="#">
               <MessageSquareIcon className="h-6 w-6" />
@@ -161,12 +161,12 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
               />
               <div className="flex-1">
                 <h1 className="font-semibold text-lg">{currentConvo?.name}</h1>
-                <p className="text-sm text-gray-500">Conversation with customer ID: {currentConvo?.id}</p>
+                <div className="text-sm text-gray-500">Conversation with customer ID: {currentConvo?.id}</div>
               </div>
               <Button size="sm">Assign</Button>
             </div>
           </div>
-          <div id="chat-window" className="border-t border-gray-200 h-[800px] overflow-auto">
+          <div id="chat-window" className="border-t border-gray-200 h-full overflow-auto">
             <div className="grid gap-4 p-4">
               {!messages?.messages ? <div>Select a conversation</div> : messages.messages.map((message: { id: Key | null | undefined; from: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | PromiseLikeOfReactNode | null | undefined; message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }) => (
                 <div
@@ -201,9 +201,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
             <form ref={ref} action={async (formData) => {
               ref.current?.reset();
               await handleSubmitWithData(formData);
-              if (document?.getElementById("chat-window")) {
-                (document?.getElementById("chat-window") ?? { scrollTo: () => {}}).scrollTo(0, 2000);
-              }
+              window.scrollTo(0, document.body.scrollHeight);              
             }} className="flex gap-4 p-4 border-t">
               <Input ref={box} name="message" className="flex-1 min-h-[40px] " placeholder="Type a message..." type="text" />
               <Button type="submit">Send</Button>
