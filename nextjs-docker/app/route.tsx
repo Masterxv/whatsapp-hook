@@ -1,3 +1,4 @@
 export const GET = async (req: Request) => {
-  return Response.redirect(req.url + "/admin");
+  const isProd = process.env.NODE_ENV === 'production'
+  return Response.redirect(isProd ? 'https://node.taskmate.ae/next' : req.url + "/admin");
 }
