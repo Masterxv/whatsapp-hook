@@ -14,6 +14,7 @@ export default async function Home({
   const convoId = searchParams.convo; // Add type assertion
   const { pb, cookies } = await server_component_pb();
   return (<>
+  
 			<div className='flex px-4 items-center border-b-2'>
 				<h1>Hi, {pb.authStore.model?.username}!</h1>
 				<div className='ml-auto'>

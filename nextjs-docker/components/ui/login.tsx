@@ -32,10 +32,12 @@ function launchWhatsAppSignup() {
         fetch('/api/facebook?code=' + code).then(async access => {
           const r = await access.json();
           const access_token = r.access_token;
+          window.localStorage.setItem('access_token', access_token);
           fetch("/api/facebook-data?access_token=" + access_token).then(async user => {
             console.log(user)
             const u = await user.json();
             console.log(u);
+            window.location.href = "/admin";
           });
         });
         
@@ -90,11 +92,11 @@ export default function Login({ handleChange }: { handleChange: (event: React.Ch
     <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle>Login</CardTitle>
-        <CardDescription>Enter your email below to login to your account</CardDescription>
+        <CardDescription>Use facebook login to register with your whatsapp business account</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <div className="grid gap-2">
+          {/* <div className="grid gap-2">
             <Label htmlFor="identity">User Name</Label>
             <Input id="identity" onChange={handleChange} name="identity" required type="text" />
           </div>
@@ -106,21 +108,20 @@ export default function Login({ handleChange }: { handleChange: (event: React.Ch
               </Link>
             </div>
             <Input name="password" onChange={handleChange} id="password" required type="password" />
-          </div>
-          <Button className="w-full" type="submit" variant="outline">
+          </div> */}
+          {/* <Button className="w-full" type="submit" variant="outline">
             Login
-          </Button>
+          </Button> */}
           <Button onClick={launchWhatsAppSignup} type="button" className="w-full bg-blue-400" variant="outline">
             Login with Facebook
           </Button>
-          <div className="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
         </div>
-        <div className="mt-4 text-center text-sm">
+        {/* <div className="mt-4 text-center text-sm">
           Don't have an account?
           <Link className="underline" href="#">
             Sign up
           </Link>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   )
