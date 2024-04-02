@@ -29,19 +29,27 @@ function launchWhatsAppSignup() {
       if (response.authResponse) {
         const code = response.authResponse.code;
         console.log('User granted access to your app with code: ' + code);
+        fetch('/api/facebook?code=' + code).then(async access => {
+          const r = await access.json();
+          const access_token = r.access_token;
+          fetch("/api/facebook-data?access_token=" + access_token).then(async user => {
+            console.log(user)
+            const u = await user.json();
+            console.log(u);
+          });
+        });
+        
         // The returned code must be transmitted to your backend, 
         // which will perform a server-to-server call from there to our servers for an access token
       } else {
         console.log('User cancelled login or did not fully authorize.');
       }
     }, {
-      config_id: '1411756179484268', // configuration ID goes here
+      config_id: '298049523319578', // configuration ID goes here
       response_type: 'code',    // must be set to 'code' for System User access token
       override_default_response_type: true, // when true, any response types passed in the "response_type" will take precedence over the default types
       extras: {
-        setup: {
-          // ... // Prefilled data can go here
-        },
+        "featureType": "only_waba_sharing" 
       }
     });
   } catch (error) {
