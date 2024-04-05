@@ -37,7 +37,7 @@ function launchWhatsAppSignup() {
             console.log(user)
             const u = await user.json();
             console.log(u);
-            window.location.href = "/next/admin";
+            window.location.href = window.location.href.includes('logical') ? `/admin?name=${u.name}` : `/next/admin?name=${u.name}`;
           });
         });
         

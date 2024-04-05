@@ -12,11 +12,12 @@ export default async function Home({
   searchParams
 }: { searchParams: { [key: string]: string } }) {
   const convoId = searchParams.convo; // Add type assertion
+  const name = searchParams.name;
   const { pb, cookies } = await server_component_pb();
   return (<>
   
 			<div className='flex px-4 items-center border-b-2'>
-				<h1>Hi, {pb.authStore.model?.username}!</h1>
+				<h1>Hi, {name ?? pb.authStore.model?.username}!</h1>
 				<div className='ml-auto'>
 					<Logout />
 				</div>

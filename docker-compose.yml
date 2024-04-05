@@ -1,14 +1,4 @@
 services:
-  # nocodb:
-  #   image: nocodb/nocodb:latest
-  #   volumes:
-  #     - ./nocodb:/usr/src/app/data
-  #   ports:
-  #     - 8083:8083
-  #   environment:
-  #     - PORT=8083
-  #     - NUXT_PUBLIC_NC_BACKEND_URL=https://noco.taskmate.ae
-  #     - NC_PUBLIC_URL=https://noco.taskmate.ae
   web:
     build:
         context: .
@@ -18,13 +8,6 @@ services:
       # - ./pb_migrations:/pb/pb_migrations
       # - ./pb_hooks:/pb/pb_hooks
       - ./pb_data:/pb/pb_data
-  # nitro:
-  #   build:
-  #       context: ./nitro
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     - OPENAI_API_KEY
   next:
     build:
         context: ./nextjs-docker

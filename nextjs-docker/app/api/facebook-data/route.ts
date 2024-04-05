@@ -2,7 +2,8 @@ import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const url = new URL('https://graph.facebook.com/v17.0/me?fields=id,name');
+    const url = new URL('https://graph.facebook.com/v17.0/1756714334769812');
+    console.log(req.nextUrl.searchParams.get('access_token') ?? '');
     url.searchParams.append('access_token', req.nextUrl.searchParams.get('access_token') ?? '');
     const response = await fetch(url, {
       method: "GET",
