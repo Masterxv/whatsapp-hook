@@ -23,16 +23,24 @@ function launchWhatsAppSignup() {
 
     // Conversion tracking code
     window.fbq && window.fbq('trackCustom', 'WhatsAppOnboardingStart', { appId: 'your-facebook-app-id', feature: 'whatsapp_embedded_signup' });
-
     // Launch Facebook login
     window.FB.login(function (response: any) {
       if (response.authResponse) {
         const code = response.authResponse.code;
         console.log('User granted access to your app with code: ' + code);
+        let access_token = localStorage.getItem('access_token');
         fetch('/api/facebook?code=' + code).then(async access => {
-          const r = await access.json();
-          const access_token = r.access_token;
-          window.localStorage.setItem('access_token', access_token);
+          if (code) {
+            const r = await access.json();
+            access_token = r.access_token;
+            if (access_token) {
+              window.localStorage.setItem('access_token', access_token);
+            }
+          }
+
+          // window.FB.api('/me', function(_response) {
+          //   console.log('Good to see you, ' + _response.name + '.');
+          // });
           fetch("/api/facebook-data?access_token=" + access_token).then(async user => {
             console.log(user)
             const u = await user.json();
