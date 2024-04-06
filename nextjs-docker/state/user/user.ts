@@ -51,7 +51,9 @@ export function logoutUser() {
     try {
         pb.authStore.clear();
         document.cookie=pb.authStore.exportToCookie({ httpOnly: false });
-        
+        window.FB.logout(function(response: any) {
+            // user is now logged out
+        });
     } catch (error) {
         throw error;
     }
