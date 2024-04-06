@@ -52,7 +52,7 @@ className=" hover:bg-slate-700 "
 onClick={() => {
 
     logoutUser()
-    router.refresh()
+    // router.refresh()
     router.replace('/next/auth')
      
 }} >
