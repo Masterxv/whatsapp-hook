@@ -39,13 +39,13 @@ export function ClientAuth({}: ClientAuthProps) {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
+
       <form
         onSubmit={handleSubmit}
         className="md:w-[60%] min-h-[50%] flex flex-col 
          shadow-slate-300 items-center justify-center gap-2 p-4 rounded">
           <Login handleChange={handleChange} />
       </form>
-    </div>
+
   );
 }

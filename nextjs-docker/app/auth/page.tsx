@@ -6,8 +6,10 @@ interface User {
 }
 export default async function AuthPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ClientAuth />
-    </Suspense>
+      <div className="w-full h-full flex items-center justify-center">
+        <Suspense fallback={<div>Loading...</div>}>
+          <ClientAuth />
+        </Suspense>
+      </div>
   );
 }
