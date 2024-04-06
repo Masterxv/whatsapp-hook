@@ -29,7 +29,7 @@ function launchWhatsAppSignup() {
         const code = response.authResponse.code;
         console.log('User granted access to your app with code: ' + code);
         let access_token = 'EAAI5Hdm2fCsBOwtWx9zRXjW4lTov8ryUeYgN5l8fRZB9wVfAbjsSTZAWFMZAMkxV6cmnZCxfM2uZCs5YHDALP5H2MYjrakCMZBEZAexfpqW5rYREy1KdLF7HZBD14HUqtSFnuh3HOfhH0kiAZC8CdEAcSZBGMhEdQI4H468AGByT28ijvf60kbodbyaFf1WOF9IfjM7mL482JiKH8YZBHIBIQIO1FeDWp5GbCisUuBbXmKQh5RhE9IATbm9aKpuROgIixLP5ZCEADkiXMQ8h55NKbrewpbT8P6tv04MZAppI5XZAyQ1ZAZCQ1wZDZD' ?? localStorage.getItem('access_token');
-        fetch('/api/facebook?code=' + code).then(async access => {
+        fetch('/next/api/facebook?code=' + code).then(async access => {
           if (code) {
             const r = await access.json();
             access_token = r.access_token;
@@ -41,7 +41,7 @@ function launchWhatsAppSignup() {
           // window.FB.api('/me', function(_response) {
           //   console.log('Good to see you, ' + _response.name + '.');
           // });
-          fetch("/api/facebook-data?access_token=" + access_token).then(async user => {
+          fetch("/next/api/facebook-data?access_token=" + access_token).then(async user => {
             console.log(user)
             const u = await user.json();
             console.log(u);
