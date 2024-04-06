@@ -53,6 +53,7 @@ onClick={() => {
 
     logoutUser()
     router.refresh()
+    router.replace('/next/auth')
      
 }} >
     Logout
