@@ -55,7 +55,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
   
   const handleSubmitWithData = handleSubmit.bind(null, { convoId, phoneNo: currentConvo?.phone_number, from: 'agent' });
   return (
-    <div className="w-full flex">
+    <div className="w-full flex" style={{ height: 'calc(100vh - 40px'}}>
       <div className="border-r bg-gray-100/40 block">
         <div className={clsx(`h-full flex-col gap-2`, drawerState ? 'flex' : 'hidden')}>
           <div className="flex h-[60px] items-center border-b px-6">
@@ -96,6 +96,7 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
           </div>
         </div>
       </div>
+
       <div className="flex grow flex-col">
         <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6">
           <button className="lg:hidden flex items-center gap-4 font-semibold" onClick={e => toggleDrawer(!drawerState)}>
@@ -145,6 +146,8 @@ export function ChatLayout({ convoId, resultList, conversationList }: { convoId:
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
+
+
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
           <div className="grid gap-2">
             <div className="flex items-center gap-2">
