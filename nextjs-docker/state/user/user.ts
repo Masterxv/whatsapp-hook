@@ -53,9 +53,14 @@ export function logoutUser() {
         document.cookie=pb.authStore.exportToCookie({ httpOnly: false });
         // window.FB.logout(function(response: any) {
         //     // user is now logged out
+        //     console.log(response)
+        //     window.location.href = '/next/auth';
         // });
+        window.location.href = '/next/auth';
     } catch (error) {
-        throw error;
+        console.log(error)
+
+        // throw error;
     }
 }
 
