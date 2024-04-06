@@ -50,10 +50,10 @@ return (
 <button 
 className=" hover:bg-slate-700 "
 onClick={() => {
-
-    logoutUser()
+    window.location.href = '/next/auth'
+    // logoutUser()
     // router.refresh()
-    router.replace('/next/auth')
+    // router.replace('/next/auth')
      
 }} >
     Logout
