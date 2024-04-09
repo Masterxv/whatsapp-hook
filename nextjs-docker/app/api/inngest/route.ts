@@ -58,7 +58,7 @@ const continueConversation = inngest.createFunction(
     // console.log(event);
     // get the existing conversation
     const user = await upsertNumber(event.data.from);
-    // const message = await addMessage(user.id, event.data.text.body, 'user');
+    const message = await addMessage(user.id, event.data.text.body, 'user');
     
     const conversation = await getConversation(event.data.from);
     const messages = conversation?.items.map((item) => item.message) || [];
@@ -66,6 +66,8 @@ const continueConversation = inngest.createFunction(
 
     const secondLastMessage = messages[messages.length - 2];
     const lastMessage = messages[messages.length - 1];
+
+    console.log(secondLastMessage, lastMessage);
 
     // console.log(secondLastMessage, lastMessage);
     // await send_list(event.data.from);

@@ -117,7 +117,7 @@ export async function readMessage(message_id: string) {
     });
 
     const requestOptions = {
-      method: "PUT",
+      method: "POST",
       headers: myHeaders,
       body: raw,
     };
