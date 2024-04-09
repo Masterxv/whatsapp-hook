@@ -9,6 +9,7 @@ const recieveTextMessage = inngest.createFunction(
   { id: "text-message" },
   { event: "text-message/recieve" },
   async ({ event, step }) => {
+      console.log(event);
     // Check if this is a first time user, if yes start a new conversation and save him
     // else continue the conversation
     const { business_phone_number_id, from, body } = event.data;
@@ -35,10 +36,11 @@ const onBoardUser = inngest.createFunction(
   { id: "user-onboard" },
   { event: "user/onboard" },
   async ({ event, step }) => {
+      console.log(event);
     // Save the user
     const user = await upsertNumber(event.data.from);
     const userId = user.id;
-    const message = await addMessage(userId, event.data.text.body, 'user');
+    // const message = await addMessage(userId, event.data.text.body, 'user');
     await send_message(event.data.from, NAME_MSG);
     const message2 = await addMessage(userId, NAME_MSG, 'agent');
     
@@ -51,11 +53,12 @@ const continueConversation = inngest.createFunction(
   { id: "user-continue" },
   { event: "user/continue" },
   async ({ event, step }) => {
+      console.log(event);
     // Continue the conversation
     // console.log(event);
     // get the existing conversation
     const user = await upsertNumber(event.data.from);
-    const message = await addMessage(user.id, event.data.text.body, 'user');
+    // const message = await addMessage(user.id, event.data.text.body, 'user');
     
     const conversation = await getConversation(event.data.from);
     const messages = conversation?.items.map((item) => item.message) || [];

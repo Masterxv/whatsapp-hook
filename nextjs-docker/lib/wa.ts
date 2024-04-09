@@ -5,13 +5,35 @@ const wa = new WhatsApp(Number(process.env.WA_PHONE_NUMBER_ID));
 
 export async function send_message(recipient_number: number, message: string) {
   try {
-    // console.log("sending whatspp to", recipient_number, message);
-    const sent_text_message = wa.messages.text({ "body": message }, recipient_number);
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${process.env.CLOUD_API_ACCESS_TOKEN}`);
 
-    await sent_text_message.then((res) => {
-      // console.log(res.responseBodyToJSON());
-      console.log("success")
+    const raw = JSON.stringify({
+      "messaging_product": "whatsapp",
+      "to": `${recipient_number}`,
+      "type": "text",
+      "text": { // the text object
+        "body": message
+      }
     });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
+
+    const response = await fetch("https://graph.facebook.com/v19.0/157990417405268/messages", requestOptions);
+    const result = await response.text();
+
+    // console.log("sending whatspp to", recipient_number, message);
+    // const sent_text_message = wa.messages.text({ "body": message }, recipient_number);
+    //
+    // await sent_text_message.then((res) => {
+    //   // console.log(res.responseBodyToJSON());
+    //   console.log("success")
+    // });
   }
   catch (e) {
     console.log("error")
@@ -84,11 +106,30 @@ export async function send_list(recipient_number: number, list?: string[]) {
 
 export async function readMessage(message_id: string) {
   try {
-    const read_message = wa.messages.status({ status: 'read', message_id });
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${process.env.CLOUD_API_ACCESS_TOKEN}`);
 
-    await read_message.then((res) => {
-      console.log("sent read status");
+    const raw = JSON.stringify({
+      "messaging_product": "whatsapp",
+      "status": "read",
+      "message_id": message_id
     });
+
+    const requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: raw,
+    };
+
+    const response = await fetch("https://graph.facebook.com/v19.0/157990417405268/messages", requestOptions);
+    const result = await response.text();
+    console.log({ result })
+    // const read_message = wa.messages.status({ status: 'read', message_id });
+    //
+    // await read_message.then((res) => {
+    //   console.log("sent read status");
+    // });
   }
   catch (e) {
     console.log(JSON.stringify(e));
